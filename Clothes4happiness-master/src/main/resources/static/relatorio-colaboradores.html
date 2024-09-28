@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Relatório de Colaboradores</title>
+</head>
+<body>
+
+<div class="container">
+  <h2>Relatório de Colaboradores</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Cargo</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody id="colaboradorTableBody">
+    <!-- Os dados dos colaboradores serão preenchidos aqui -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // Função para carregar os colaboradores
+  function loadColaboradores() {
+    fetch('/api/colaboradores')
+            .then(response => response.json())
+            .then(data => {
+              const tableBody = document.getElementById('colaboradorTableBody');
+              tableBody.innerHTML = ''; // Limpa a tabela antes de adicionar os novos dados
+              data.forEach(colaborador => {
+                const row = `<tr>
+                        <td>${colaborador.id}</td>
+                        <td>${colaborador.nome}</td>
+                        <td>${colaborador.cargo}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Excluir</button>
+                        </td>
+                    </tr>`;
+                tableBody.innerHTML += row;
+              });
+            })
+            .catch(error => {
+              alert('Erro ao carregar os colaboradores.');
+            });
+  }
+
+  // Carregar os colaboradores ao abrir a página
+  loadColaboradores();
+</script>
+
+</body>
+</html>

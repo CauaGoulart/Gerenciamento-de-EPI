@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Sistema de Gerenciamento de EPI</title>
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column; /* Direção vertical para o layout */
+        }
+        .topbar {
+            background-color: #007bff; /* Cor de fundo da topbar */
+            color: white; /* Cor do texto da topbar */
+            padding: 10px 20px; /* Espaçamento interno da topbar */
+            display: flex;
+            justify-content: space-between; /* Alinhamento do conteúdo */
+            align-items: center; /* Alinhamento vertical */
+        }
+        .main-container {
+            display: flex; /* Flex para alinhar a sidebar e o conteúdo */
+            flex-grow: 1; /* Permite que o container cresça */
+        }
+        .sidebar {
+            min-width: 250px;
+            background-color: #f8f9fa; /* Cor de fundo da sidebar */
+            padding: 20px;
+            border-right: 1px solid #ddd; /* Borda à direita da sidebar */
+        }
+        .content {
+            flex-grow: 1; /* Permite que o conteúdo preencha o restante do espaço */
+            padding: 20px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .user-info img {
+            border-radius: 50%; /* Imagem circular */
+            margin-left: 10px;
+            width: 40px;
+            height: 40px;
+        }
+        .nav-link {
+            color: cadetblue; /* Cor dos links */
+            padding: 10px; /* Espaçamento interno do link */
+            border-radius: 5px; /* Bordas arredondadas */
+            text-decoration: none; /* Remove sublinhado */
+        }
+        .nav-link:hover {
+            background-color: #e0e0e0; /* Cor de fundo ao passar o mouse */
+            color: #0056b3; /* Cor do texto ao passar o mouse */
+            text-decoration: none; /* Remove sublinhado ao passar o mouse */
+        }
+        .submenu {
+            padding-left: 20px; /* Indentação dos submenus */
+            display: none; /* Esconde os submenus por padrão */
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <h1>Sistema de Gerenciamento de EPI</h1>
+    <div class="user-info">
+        <span>Nome do Usuário</span>
+        <img src="path/to/user/photo.jpg" alt="Foto do Usuário">
+    </div>
+</div>
+
+<div class="main-container"> <!-- Container para a sidebar e o conteúdo -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="toggleSubMenu('equipamentoSubMenu')">Equipamento</a>
+                <ul class="nav flex-column submenu" id="equipamentoSubMenu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadPage('equipamentos.html')">Cadastrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadPage('relatorio-equipamentos.html')">Relatório</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadPage('controle-epi.html')">Controle EPI</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="toggleSubMenu('colaboradorSubMenu')">Colaborador</a>
+                <ul class="nav flex-column submenu" id="colaboradorSubMenu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadPage('colaboradores.html')">Cadastrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="loadPage('relatorio-colaboradores.html')">Relatório</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="mainContent">
+            <h2>Bem-vindo ao Sistema!</h2>
+            <p>Selecione uma opção no menu à esquerda.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadPage(page) {
+        fetch(page)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar a página.');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('mainContent').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('mainContent').innerHTML = `<p>${error.message}</p>`;
+            });
+    }
+
+    function toggleSubMenu(subMenuId) {
+        const subMenu = document.getElementById(subMenuId);
+        subMenu.style.display = subMenu.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+
+</body>
+</html>

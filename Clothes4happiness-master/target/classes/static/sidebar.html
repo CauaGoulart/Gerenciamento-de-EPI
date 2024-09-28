@@ -1,0 +1,30 @@
+<div class="sidebar">
+  <h2>Menu</h2>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="#" onclick="toggleSubMenu('equipamentoSubMenu')">Equipamento</a>
+      <ul class="nav flex-column submenu" id="equipamentoSubMenu">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadPage('cadastrar-equipamento.html')">Cadastrar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadPage('relatorio-equipamentos.html')">Relatório</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="controle-epi.html">Controle EPI</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" onclick="toggleSubMenu('colaboradorSubMenu')">Colaborador</a>
+      <ul class="nav flex-column submenu" id="colaboradorSubMenu">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadPage('cadastrar-colaborador.html')">Cadastrar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="loadPage('relatorio-colaboradores.html')">Relatório</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
